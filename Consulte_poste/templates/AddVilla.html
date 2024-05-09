@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rental of summer houses</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+    <style>
+      body{
+        width: 100%;
+        height: 100vh;
+        background-image: url('{% static "dddddd.jpeg" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+      
+      </style>
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'Consulte_poste:homeIn' %}">rental of summer houses</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'Consulte_poste:homeIn' %}">Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+
+          </ul>
+    
+   
+          
+
+          <form class="d-flex">
+     
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav me-auto">
+             
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user}} ACTIONS</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Add-villa' %}">Add your villa</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Add-App' %}">Add your appartment</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-Pvilla' %}">Show your villas</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-PApp' %}">Show your appartment</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-PersReserVil' %}">Show all villa reservations </a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-PersReserApp' %}">Show all apartment reservations </a>
+                
+                    </div>
+                  </li>
+               
+                  {% if user.is_superuser %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMIN ACTIONS</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-user' %}">Show all users</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-villa' %}">Show all villas</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-app' %}">Show all appartment</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-ReserVilla' %}">Show all villa reservations</a>
+                      <a class="dropdown-item" href="{% url 'Consulte_poste:Liste-Reserapp' %}">Show all apartment reservations</a>
+                     
+                
+                    </div>
+                  </li>
+                  {% endif %}
+                
+ 
+            
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'Logout' %}">LOGOUT</a>
+                </li>
+             </ul>
+         
+            {% else %}
+            <ul class="navbar-nav me-auto">
+             
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Login' %}">LOGIN</a>
+            </li>
+              
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Registre' %}">SIGNIN</a>
+            </li>
+           
+         </ul>
+  
+            {% endif %}
+
+
+            <input class="form-control me-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+         </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+  
+    <table  class="tabcenter">
+    <form method="post" enctype="multipart/form-data" >
+      <fieldset>
+        <legend Align=Center>Add  Villa</legend>
+    
+       <br>
+       <br>
+     
+        {% csrf_token %}
+        {{ form.as_table  }} 
+
+      
+      
+  
+      
+        
+     
+  
+      </fieldset>
+
+    </table>
+    <br>
+  
+    <div style="text-align:center">
+      <button type="submit" class="btn btn-primary">Confirm</button>
+      </div>
+
+    </form>
+
+
+
+   
+             
+
+    <style>
+      .tabcenter{
+       margin-left:auto;
+       margin-right:auto;
+    }
+    
+    
+    
+    </style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
